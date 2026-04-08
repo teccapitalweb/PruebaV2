@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patitas del Rey — Snacks para Mascotas</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --naranja: #E8541A;
+    --naranja-dark: #c4430f;
+    --naranja-light: #FF7A42;
+    --crema: #FFF8F0;
+    --negro: #1A1A1A;
+    --gris: #6B6B6B;
+    --gris-claro: #F5F0EA;
+    --blanco: #ffffff;
+    --font-display: 'Fredoka One', cursive;
+    --font-body: 'Nunito', sans-serif;
+    --radius: 20px;
+    --radius-sm: 12px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--crema);
+    color: var(--negro);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ─────────────────────────────────────────── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(255,248,240,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid var(--naranja);
+    padding: 0 5%;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    color: var(--naranja);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .nav-logo span.paw { font-size: 1.4rem; }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--negro);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--naranja); }
+
+  .nav-cta {
+    background: var(--naranja);
+    color: var(--blanco) !important;
+    padding: 8px 20px;
+    border-radius: 50px;
+    transition: background 0.2s, transform 0.15s !important;
+  }
+  .nav-cta:hover {
+    background: var(--naranja-dark) !important;
+    transform: translateY(-1px);
+    color: var(--blanco) !important;
+  }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+  }
+  .hamburger span {
+    display: block;
+    width: 26px; height: 3px;
+    background: var(--negro);
+    border-radius: 4px;
+    transition: all 0.3s;
+  }
+
+  /* ── HERO ─────────────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    padding-top: 68px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg-pattern {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* Patas animadas en el fondo */
+  .paw-bg {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.06;
+    animation: floatPaw 8s ease-in-out infinite;
+    color: var(--naranja);
+  }
+
+  @keyframes floatPaw {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(10deg); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    padding: 5% 5% 5% 8%;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--naranja);
+    color: var(--blanco);
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 50px;
+    margin-bottom: 1.5rem;
+    animation: slideIn 0.6s ease forwards;
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    line-height: 1.05;
+    color: var(--negro);
+    margin-bottom: 1.2rem;
+    animation: slideIn 0.7s 0.1s ease both;
+  }
+
+  .hero-title .highlight {
+    color: var(--naranja);
+    display: inline-block;
+    position: relative;
+  }
+
+  .hero-title .highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 0; right: 0;
+    height: 6px;
+    background: var(--naranja);
+    opacity: 0.2;
+    border-radius: 3px;
+  }
+
+  .hero-desc {
+    font-size: 1.1rem;
+    color: var(--gris);
+    line-height: 1.7;
+    max-width: 440px;
+    margin-bottom: 2.5rem;
+    animation: slideIn 0.7s 0.2s ease both;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    animation: slideIn 0.7s 0.3s ease both;
+  }
+
+  .btn-primary {
+    background: var(--naranja);
+    color: var(--blanco);
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 1rem;
+    padding: 14px 32px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 4px 20px rgba(232,84,26,0.35);
+  }
+  .btn-primary:hover {
+    background: var(--naranja-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(232,84,26,0.4);
+  }
+  .btn-primary:active { transform: translateY(0); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--negro);
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 1rem;
+    padding: 13px 32px;
+    border-radius: 50px;
+    border: 2.5px solid var(--negro);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+  }
+  .btn-outline:hover {
+    border-color: var(--naranja);
+    color: var(--naranja);
+    transform: translateY(-3px);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 2rem;
+    margin-top: 3rem;
+    animation: slideIn 0.7s 0.4s ease both;
+  }
+  .stat { display: flex; flex-direction: column; }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    color: var(--naranja);
+    line-height: 1;
+  }
+  .stat-label { font-size: 0.78rem; color: var(--gris); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  /* Hero imagen / ilustración */
+  .hero-visual {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 5% 3rem 0;
+    animation: slideIn 0.8s 0.2s ease both;
+  }
+
+  .hero-blob {
+    position: relative;
+    width: min(480px, 90%);
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .blob-bg {
+    position: absolute;
+    inset: 0;
+    background: var(--naranja);
+    border-radius: 60% 40% 50% 50% / 50% 60% 40% 50%;
+    animation: morphBlob 8s ease-in-out infinite;
+    opacity: 0.12;
+  }
+
+  @keyframes morphBlob {
+    0%, 100% { border-radius: 60% 40% 50% 50% / 50% 60% 40% 50%; }
+    33% { border-radius: 50% 50% 60% 40% / 40% 50% 50% 60%; }
+    66% { border-radius: 40% 60% 40% 60% / 60% 40% 60% 40%; }
+  }
+
+  .hero-emoji-main {
+    font-size: clamp(8rem, 18vw, 14rem);
+    filter: drop-shadow(0 20px 40px rgba(232,84,26,0.25));
+    animation: bounce 3s ease-in-out infinite;
+    line-height: 1;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-emoji-float {
+    position: absolute;
+    font-size: 3rem;
+    animation: floatEmoji 4s ease-in-out infinite;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.1));
+  }
+  .hero-emoji-float:nth-child(2) { top: 10%; right: 12%; animation-delay: 0s; }
+  .hero-emoji-float:nth-child(3) { bottom: 15%; right: 8%; animation-delay: 1s; }
+  .hero-emoji-float:nth-child(4) { top: 20%; left: 5%; animation-delay: 2s; font-size: 2.5rem; }
+  .hero-emoji-float:nth-child(5) { bottom: 20%; left: 10%; animation-delay: 0.5s; font-size: 2rem; }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-16px); }
+  }
+
+  @keyframes floatEmoji {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-12px) rotate(5deg); }
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── CATEGORÍAS ───────────────────────────────────── */
+  .section {
+    padding: 6rem 8%;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .section-tag {
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--naranja);
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.1;
+    color: var(--negro);
+  }
+
+  .cats-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .cat-card {
+    border-radius: var(--radius);
+    padding: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.25s, box-shadow 0.25s;
+    text-decoration: none;
+  }
+  .cat-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.12); }
+
+  .cat-card.dogs {
+    background: var(--naranja);
+    color: var(--blanco);
+  }
+  .cat-card.cats {
+    background: var(--negro);
+    color: var(--blanco);
+  }
+
+  .cat-card::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.07);
+  }
+
+  .cat-emoji { font-size: 5rem; flex-shrink: 0; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.2)); }
+
+  .cat-info { flex: 1; }
+  .cat-name {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+  .cat-desc { font-size: 0.92rem; opacity: 0.8; line-height: 1.5; margin-bottom: 1rem; }
+  .cat-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 800;
+    font-size: 0.88rem;
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 2px solid rgba(255,255,255,0.4);
+    padding-bottom: 2px;
+    transition: border-color 0.2s, gap 0.2s;
+  }
+  .cat-link:hover { border-color: rgba(255,255,255,0.9); gap: 10px; }
+
+  /* ── PRODUCTOS ────────────────────────────────────── */
+  .productos { background: var(--blanco); }
+
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 10px 24px;
+    border-radius: 50px;
+    border: 2.5px solid transparent;
+    cursor: pointer;
+    background: var(--gris-claro);
+    color: var(--gris);
+    transition: all 0.2s;
+  }
+  .tab-btn:hover, .tab-btn.active {
+    background: var(--naranja);
+    color: var(--blanco);
+    border-color: var(--naranja);
+  }
+
+  .productos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .prod-card {
+    background: var(--crema);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+    display: flex;
+    flex-direction: column;
+  }
+  .prod-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(232,84,26,0.15);
+  }
+
+  .prod-img {
+    background: var(--gris-claro);
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+  .prod-card:hover .prod-img { background: rgba(232,84,26,0.08); }
+
+  .prod-badge {
+    position: absolute;
+    top: 12px; left: 12px;
+    background: var(--naranja);
+    color: var(--blanco);
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .prod-body { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; }
+
+  .prod-animal {
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--naranja);
+    margin-bottom: 0.4rem;
+  }
+
+  .prod-name {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    color: var(--negro);
+    margin-bottom: 0.4rem;
+    line-height: 1.2;
+  }
+
+  .prod-desc {
+    font-size: 0.83rem;
+    color: var(--gris);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    flex: 1;
+  }
+
+  .prod-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+  }
+
+  .prod-price {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    color: var(--negro);
+  }
+
+  .prod-add {
+    background: var(--naranja);
+    color: var(--blanco);
+    border: none;
+    border-radius: 50px;
+    width: 38px; height: 38px;
+    font-size: 1.3rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, transform 0.15s;
+    line-height: 1;
+  }
+  .prod-add:hover { background: var(--naranja-dark); transform: scale(1.1); }
+  .prod-add:active { transform: scale(0.95); }
+
+  /* ── BENEFICIOS ───────────────────────────────────── */
+  .beneficios { background: var(--negro); color: var(--blanco); }
+  .beneficios .section-tag { color: var(--naranja-light); }
+  .beneficios .section-title { color: var(--blanco); }
+
+  .beneficios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .ben-card {
+    background: rgba(255,255,255,0.05);
+    border: 1.5px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius);
+    padding: 2rem;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .ben-card:hover {
+    background: rgba(232,84,26,0.12);
+    border-color: rgba(232,84,26,0.3);
+  }
+
+  .ben-icon {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .ben-title {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    margin-bottom: 0.6rem;
+    color: var(--blanco);
+  }
+  .ben-desc { font-size: 0.88rem; color: rgba(255,255,255,0.6); line-height: 1.6; }
+
+  /* ── TESTIMONIOS ──────────────────────────────────── */
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .testi-card {
+    background: var(--blanco);
+    border-radius: var(--radius);
+    padding: 2rem;
+    border: 2px solid transparent;
+    transition: border-color 0.3s, transform 0.25s;
+  }
+  .testi-card:hover { border-color: var(--naranja); transform: translateY(-4px); }
+
+  .stars { color: var(--naranja); font-size: 1.1rem; margin-bottom: 1rem; letter-spacing: 2px; }
+  .testi-text { font-size: 0.95rem; color: var(--gris); line-height: 1.7; margin-bottom: 1.5rem; font-style: italic; }
+  .testi-author { display: flex; align-items: center; gap: 12px; }
+  .author-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--naranja);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+  .author-name { font-weight: 800; font-size: 0.92rem; color: var(--negro); }
+  .author-pet { font-size: 0.78rem; color: var(--gris); }
+
+  /* ── CTA ──────────────────────────────────────────── */
+  .cta-section {
+    background: var(--naranja);
+    color: var(--blanco);
+    text-align: center;
+    padding: 6rem 8%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before, .cta-section::after {
+    content: '🐾';
+    position: absolute;
+    font-size: 10rem;
+    opacity: 0.07;
+  }
+  .cta-section::before { top: -2rem; left: -2rem; transform: rotate(-20deg); }
+  .cta-section::after { bottom: -3rem; right: -2rem; transform: rotate(20deg); }
+
+  .cta-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+  }
+  .cta-desc {
+    font-size: 1.1rem;
+    opacity: 0.85;
+    max-width: 520px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-btns {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+
+  .btn-white {
+    background: var(--blanco);
+    color: var(--naranja);
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 1rem;
+    padding: 14px 32px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  .btn-white:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+
+  .btn-outline-white {
+    background: transparent;
+    color: var(--blanco);
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 1rem;
+    padding: 13px 32px;
+    border-radius: 50px;
+    border: 2.5px solid rgba(255,255,255,0.6);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+  }
+  .btn-outline-white:hover { border-color: var(--blanco); background: rgba(255,255,255,0.1); transform: translateY(-3px); }
+
+  /* ── FOOTER ───────────────────────────────────────── */
+  footer {
+    background: var(--negro);
+    color: rgba(255,255,255,0.7);
+    padding: 4rem 8% 2rem;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .footer-brand {}
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--naranja);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 1rem;
+  }
+  .footer-about { font-size: 0.88rem; line-height: 1.7; margin-bottom: 1.5rem; }
+
+  .social-links { display: flex; gap: 10px; }
+  .social-btn {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-decoration: none;
+    color: inherit;
+  }
+  .social-btn:hover { background: var(--naranja); }
+
+  .footer-col h4 {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    color: var(--blanco);
+    margin-bottom: 1.2rem;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 0.6rem; }
+  .footer-col a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--naranja); }
+
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.82rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-bottom-logo { font-family: var(--font-display); color: var(--naranja); font-size: 1rem; }
+
+  /* ── CARRITO FLOTANTE ─────────────────────────────── */
+  .cart-fab {
+    position: fixed;
+    bottom: 28px; right: 28px;
+    z-index: 200;
+    background: var(--naranja);
+    color: var(--blanco);
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 24px rgba(232,84,26,0.45);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .cart-fab:hover { transform: scale(1.1); box-shadow: 0 10px 32px rgba(232,84,26,0.55); }
+
+  .cart-badge {
+    position: absolute;
+    top: -4px; right: -4px;
+    background: var(--negro);
+    color: var(--blanco);
+    font-size: 0.65rem;
+    font-weight: 800;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--naranja);
+  }
+
+  /* ── TOAST ────────────────────────────────────────── */
+  .toast {
+    position: fixed;
+    bottom: 100px; right: 28px;
+    background: var(--negro);
+    color: var(--blanco);
+    padding: 12px 20px;
+    border-radius: var(--radius-sm);
+    font-size: 0.88rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    transform: translateX(120%);
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 300;
+    max-width: 280px;
+  }
+  .toast.show { transform: translateX(0); }
+
+  /* ── SCROLL REVEAL ────────────────────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── MOBILE MENU ──────────────────────────────────── */
+  .mobile-menu {
+    position: fixed;
+    top: 68px; left: 0; right: 0;
+    background: var(--crema);
+    border-bottom: 2px solid var(--naranja);
+    padding: 1.5rem 8%;
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+    z-index: 90;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-weight: 700;
+    color: var(--negro);
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+
+  /* ── RESPONSIVE ───────────────────────────────────── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; text-align: center; }
+    .hero-content { padding: 3rem 8% 1rem; }
+    .hero-desc { margin: 0 auto 2rem; }
+    .hero-btns { justify-content: center; }
+    .hero-stats { justify-content: center; }
+    .hero-visual { padding: 1rem 8% 3rem; }
+    .cats-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 580px) {
+    .section { padding: 4rem 5%; }
+    .footer-top { grid-template-columns: 1fr; }
+    .hero-emoji-main { font-size: 7rem; }
+  }
+
+  /* Divider wave */
+  .wave-divider {
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    background: var(--crema);
+  }
+  .wave-divider.dark { background: var(--negro); }
+  .wave-divider svg { display: block; width: 100%; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <span class="paw">🐾</span> Patitas del Rey
+  </a>
+  <ul class="nav-links">
+    <li><a href="#categorias">Categorías</a></li>
+    <li><a href="#productos">Productos</a></li>
+    <li><a href="#beneficios">Beneficios</a></li>
+    <li><a href="#testimonios">Reseñas</a></li>
+    <li><a href="#contacto" class="nav-cta">Contacto</a></li>
+  </ul>
+  <button class="hamburger" id="hambBtn" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#categorias" onclick="closeMobile()">Categorías</a>
+  <a href="#productos" onclick="closeMobile()">Productos</a>
+  <a href="#beneficios" onclick="closeMobile()">Beneficios</a>
+  <a href="#testimonios" onclick="closeMobile()">Reseñas</a>
+  <a href="#contacto" onclick="closeMobile()">Contacto</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <!-- Patas de fondo -->
+  <div class="hero-bg-pattern" aria-hidden="true">
+    <div class="paw-bg" style="top:12%; left:5%; animation-delay:0s;">🐾</div>
+    <div class="paw-bg" style="top:60%; left:2%; animation-delay:2s; font-size:1.4rem;">🐾</div>
+    <div class="paw-bg" style="top:30%; right:4%; animation-delay:1s; font-size:1.6rem;">🐾</div>
+    <div class="paw-bg" style="bottom:15%; right:6%; animation-delay:3s;">🐾</div>
+    <div class="paw-bg" style="bottom:8%; left:40%; animation-delay:1.5s; font-size:1.2rem;">🐾</div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-badge">🐾 Snacks Naturales y Saludables</div>
+    <h1 class="hero-title">
+      Tu mascota<br>
+      merece lo<br>
+      <span class="highlight">mejor</span>
+    </h1>
+    <p class="hero-desc">
+      Snacks artesanales para perros y gatos, elaborados con ingredientes naturales seleccionados. Sin conservadores, con mucho amor.
+    </p>
+    <div class="hero-btns">
+      <a href="#productos" class="btn-primary">🛒 Ver Snacks</a>
+      <a href="#categorias" class="btn-outline">Explorar →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">500+</span>
+        <span class="stat-label">Mascotas felices</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">30+</span>
+        <span class="stat-label">Variedades</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">100%</span>
+        <span class="stat-label">Natural</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-blob">
+      <div class="blob-bg"></div>
+      <span class="hero-emoji-main">🐶</span>
+      <span class="hero-emoji-float">🦴</span>
+      <span class="hero-emoji-float">🐟</span>
+      <span class="hero-emoji-float">⭐</span>
+      <span class="hero-emoji-float">🐾</span>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORÍAS -->
+<section class="section" id="categorias">
+  <div class="section-header reveal">
+    <span class="section-tag">¿Para quién es?</span>
+    <h2 class="section-title">Snacks para cada rey 👑</h2>
+  </div>
+  <div class="cats-grid reveal">
+    <a class="cat-card dogs" href="#productos" onclick="filterTab('perros')">
+      <span class="cat-emoji">🐶</span>
+      <div class="cat-info">
+        <h3 class="cat-name">Para Perros</h3>
+        <p class="cat-desc">Premios, galletas y snacks proteicos formulados especialmente para tus perros. ¡Les encantarán!</p>
+        <span class="cat-link">Ver snacks para perros →</span>
+      </div>
+    </a>
+    <a class="cat-card cats" href="#productos" onclick="filterTab('gatos')">
+      <span class="cat-emoji">🐱</span>
+      <div class="cat-info">
+        <h3 class="cat-name">Para Gatos</h3>
+        <p class="cat-desc">Bocadillos irresistibles de atún, pollo y salmón para los gatitos más exigentes.</p>
+        <span class="cat-link">Ver snacks para gatos →</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- PRODUCTOS -->
+<section class="section productos" id="productos">
+  <div class="section-header reveal">
+    <span class="section-tag">Nuestros Snacks</span>
+    <h2 class="section-title">Los favoritos del Rey 🦴</h2>
+  </div>
+
+  <div class="tabs reveal" id="productTabs">
+    <button class="tab-btn active" data-filter="todos" onclick="setFilter('todos', this)">🐾 Todos</button>
+    <button class="tab-btn" data-filter="perros" onclick="setFilter('perros', this)">🐶 Perros</button>
+    <button class="tab-btn" data-filter="gatos" onclick="setFilter('gatos', this)">🐱 Gatos</button>
+  </div>
+
+  <div class="productos-grid" id="productosGrid">
+    <!-- Cards generadas por JS -->
+  </div>
+</section>
+
+<!-- WAVE -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 60 C360 0 1080 0 1440 60 L1440 0 L0 0 Z" fill="#1A1A1A"/>
+  </svg>
+</div>
+
+<!-- BENEFICIOS -->
+<section class="section beneficios" id="beneficios">
+  <div class="section-header reveal">
+    <span class="section-tag">¿Por qué elegirnos?</span>
+    <h2 class="section-title">Hechos con amor 🐾</h2>
+  </div>
+  <div class="beneficios-grid">
+    <div class="ben-card reveal">
+      <span class="ben-icon">🌿</span>
+      <h3 class="ben-title">100% Natural</h3>
+      <p class="ben-desc">Sin conservadores artificiales, colorantes ni saborizantes. Solo ingredientes que reconocerías en tu cocina.</p>
+    </div>
+    <div class="ben-card reveal">
+      <span class="ben-icon">👨‍⚕️</span>
+      <h3 class="ben-title">Avalados por veterinarios</h3>
+      <p class="ben-desc">Fórmulas revisadas por nutricionistas especializados en mascotas para garantizar su salud y bienestar.</p>
+    </div>
+    <div class="ben-card reveal">
+      <span class="ben-icon">🚀</span>
+      <h3 class="ben-title">Envío rápido</h3>
+      <p class="ben-desc">Entregamos en Tehuacán y zona conurbada el mismo día. Envíos a todo México en 1-3 días hábiles.</p>
+    </div>
+    <div class="ben-card reveal">
+      <span class="ben-icon">💰</span>
+      <h3 class="ben-title">Precio justo</h3>
+      <p class="ben-desc">Calidad premium sin pagar de más. Planes de suscripción mensual con hasta 20% de descuento.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WAVE INVERSO -->
+<div class="wave-divider dark">
+  <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0 C360 60 1080 60 1440 0 L1440 60 L0 60 Z" fill="#FFF8F0"/>
+  </svg>
+</div>
+
+<!-- TESTIMONIOS -->
+<section class="section" id="testimonios">
+  <div class="section-header reveal">
+    <span class="section-tag">Testimonios</span>
+    <h2 class="section-title">Papás y mamás felices 🥰</h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">"¡Mi Labrador Rocky no puede esperar la hora del snack! Los premios de pollo son sus favoritos, y yo estoy tranquila sabiendo que son naturales."</p>
+      <div class="testi-author">
+        <div class="author-avatar">🐕</div>
+        <div>
+          <div class="author-name">Ana Martínez</div>
+          <div class="author-pet">Mamá de Rocky, Labrador</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">"Mi gata Canela es super selectiva, pero los snacks de salmón los devora en segundos. El envío llegó muy rápido y el empaque es muy bonito."</p>
+      <div class="testi-author">
+        <div class="author-avatar">🐈</div>
+        <div>
+          <div class="author-name">Luis Herrera</div>
+          <div class="author-pet">Papá de Canela, Persa</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">"Excelente servicio y productos de calidad. Mi veterinaria me los recomendó y desde entonces son parte de la rutina diaria de mis dos perros."</p>
+      <div class="testi-author">
+        <div class="author-avatar">🐶</div>
+        <div>
+          <div class="author-name">Carmen Vega</div>
+          <div class="author-pet">Mamá de Lola y Max</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contacto">
+  <h2 class="cta-title">¿Listo para consentir a tu Rey? 👑</h2>
+  <p class="cta-desc">Ordena ahora por WhatsApp o visítanos en Tehuacán. Primera compra con 10% de descuento.</p>
+  <div class="cta-btns">
+    <a href="https://wa.me/522381234567?text=Hola!%20quiero%20conocer%20los%20snacks%20de%20Patitas%20del%20Rey" target="_blank" class="btn-white">💬 WhatsApp</a>
+    <a href="#productos" class="btn-outline-white">🛒 Ver catálogo</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo">🐾 Patitas del Rey</div>
+      <p class="footer-about">Snacks naturales y artesanales para perros y gatos. Elaborados con amor en Tehuacán, Puebla, para las mascotas más especiales.</p>
+      <div class="social-links">
+        <a class="social-btn" href="#" title="Facebook">📘</a>
+        <a class="social-btn" href="#" title="Instagram">📸</a>
+        <a class="social-btn" href="https://wa.me/522381234567" target="_blank" title="WhatsApp">💬</a>
+        <a class="social-btn" href="#" title="TikTok">🎵</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Productos</h4>
+      <ul>
+        <li><a href="#productos">Snacks para perros</a></li>
+        <li><a href="#productos">Snacks para gatos</a></li>
+        <li><a href="#productos">Packs familiares</a></li>
+        <li><a href="#productos">Ediciones especiales</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Ayuda</h4>
+      <ul>
+        <li><a href="#">Cómo ordenar</a></li>
+        <li><a href="#">Envíos y entregas</a></li>
+        <li><a href="#">Política de cambios</a></li>
+        <li><a href="#">Preguntas frecuentes</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="https://wa.me/522381234567">📱 (238) 123-4567</a></li>
+        <li><a href="mailto:hola@patitasdelrey.mx">✉️ hola@patitasdelrey.mx</a></li>
+        <li><a href="#">📍 Tehuacán, Puebla</a></li>
+        <li><a href="#">🕐 Lun–Sáb 9am–7pm</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 <span class="footer-bottom-logo">Patitas del Rey</span>. Todos los derechos reservados.</span>
+    <span>Hecho con 🧡 en Tehuacán, Puebla</span>
+  </div>
+</footer>
+
+<!-- CARRITO FAB -->
+<button class="cart-fab" id="cartFab" onclick="showToast('¡Pronto podrás gestionar tu carrito! 🛒')">
+  🛒
+  <span class="cart-badge" id="cartCount">0</span>
+</button>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <span id="toastIcon">✅</span>
+  <span id="toastMsg">Añadido al carrito</span>
+</div>
+
+<script>
+  /* ─── Datos de productos ─── */
+  const productos = [
+    { id:1, nombre:'Galletas de Pollo', animal:'perros', emoji:'🍗', precio:'$85', desc:'Crujientes y proteicas. Ideales para entrenamiento y premiación diaria.', badge:'Favorito' },
+    { id:2, nombre:'Huesos de Res Secos', animal:'perros', emoji:'🦴', precio:'$95', desc:'Masticables naturales que fortalecen dientes y mantienen ocupado a tu perro.', badge:null },
+    { id:3, nombre:'Snack de Salmón', animal:'gatos', emoji:'🐟', precio:'$75', desc:'Bocadillos suaves con salmón del Atlántico. Ricos en Omega-3 para pelo brillante.', badge:'Nuevo' },
+    { id:4, nombre:'Tiras de Pavo', animal:'perros', emoji:'🦃', precio:'$90', desc:'Tiras deshidratadas de pavo, bajas en grasa y altas en proteína.', badge:null },
+    { id:5, nombre:'Bocaditos de Atún', animal:'gatos', emoji:'🐠', precio:'$70', desc:'Pequeñas croquetas de atún irresistibles para el paladar felino.', badge:'Favorito' },
+    { id:6, nombre:'Galletas de Zanahoria', animal:'perros', emoji:'🥕', precio:'$65', desc:'Snack vegetal bajo en calorías, perfecto para perros con dieta controlada.', badge:null },
+    { id:7, nombre:'Crispy de Pollo', animal:'gatos', emoji:'🐔', precio:'$80', desc:'Pequeños trozos crujientes de pollo liofilizado, sin aditivos.', badge:'Nuevo' },
+    { id:8, nombre:'Pack Combo Rey', animal:'perros', emoji:'👑', precio:'$220', desc:'Set de 3 snacks surtidos: pollo, pavo y zanahoria. Ahorra 15%.', badge:'Oferta' },
+  ];
+
+  let currentFilter = 'todos';
+  let cartCount = 0;
+
+  function renderProductos(filter = 'todos') {
+    const grid = document.getElementById('productosGrid');
+    const filtered = filter === 'todos' ? productos : productos.filter(p => p.animal === filter);
+    grid.innerHTML = filtered.map(p => `
+      <div class="prod-card reveal">
+        <div class="prod-img">
+          ${p.badge ? `<span class="prod-badge">${p.badge}</span>` : ''}
+          <span style="font-size:5rem;">${p.emoji}</span>
+        </div>
+        <div class="prod-body">
+          <div class="prod-animal">${p.animal === 'perros' ? '🐶 Para Perros' : '🐱 Para Gatos'}</div>
+          <div class="prod-name">${p.nombre}</div>
+          <div class="prod-desc">${p.desc}</div>
+          <div class="prod-footer">
+            <span class="prod-price">${p.precio}</span>
+            <button class="prod-add" onclick="addToCart('${p.nombre}')" title="Agregar al carrito">+</button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+    /* re-observe nuevos elementos */
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  }
+
+  function setFilter(filter, btn) {
+    currentFilter = filter;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderProductos(filter);
+    document.getElementById('productos').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function filterTab(filter) {
+    currentFilter = filter;
+    setTimeout(() => {
+      const btn = document.querySelector(`[data-filter="${filter}"]`);
+      if (btn) {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderProductos(filter);
+      }
+    }, 400);
+  }
+
+  /* ─── Carrito ─── */
+  function addToCart(nombre) {
+    cartCount++;
+    document.getElementById('cartCount').textContent = cartCount;
+    showToast(`🐾 ¡${nombre} añadido!`);
+  }
+
+  /* ─── Toast ─── */
+  let toastTimer;
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    document.getElementById('toastMsg').textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+  }
+
+  /* ─── Scroll reveal ─── */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  /* ─── Hamburger ─── */
+  const hambBtn = document.getElementById('hambBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hambBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMobile() { mobileMenu.classList.remove('open'); }
+
+  /* ─── Init ─── */
+  renderProductos();
+</script>
+</body>
+</html>
